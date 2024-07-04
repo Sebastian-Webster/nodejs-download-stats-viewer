@@ -57,8 +57,4 @@ jobs:
           message: 'added new day data'
           branch: 'gh-pages'
           github_token: ${{ secrets.GH_TOKEN }}
-
-      - name: Commit new data
-        working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
-        run: git add . && git commit -m "action - added new data" && git push
       
