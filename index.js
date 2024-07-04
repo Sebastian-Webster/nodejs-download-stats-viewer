@@ -5,8 +5,13 @@ const path = require('path')
 const axios = require('axios')
 
 async function main() {
-    if (!process.env.saveFolder) {
-        console.error('Missing process.env.saveFolder')
+    if (!process.env.dayDataFolder) {
+        console.error('Missing process.env.dayDataFolder')
+        process.exit(1)
+    }
+
+    if (!process.env.dayListFolder) {
+        console.error('Missing process.env.dayListFolder')
         process.exit(1)
     }
     
@@ -33,11 +38,21 @@ async function main() {
         data: statList
     }
     
-    fs.writeFileSync(path.resolve(process.env.saveFolder, 'data.json'), JSON.stringify(toWrite), {encoding: 'utf-8'})
+    fs.writeFileSync(path.resolve(process.env.dayListFolder, 'data.json'), JSON.stringify(toWrite), {encoding: 'utf-8'})
+
+    const files = fs.readdirSync(process.env.dayDataFolder)
+
+    const newFiles = statList.filter(stat => !files.includes(`${stat.date}.json`))
+
+    if (newFiles.length === 0) {
+        console.log('No new files to download.')
+    } else {
+        console.log('Downloading', newFiles.length, 'new files.')
+    }
     
-    for (const {href, date} of statList) {
+    for (const {href, date} of newFiles) {
         axios.get(href).then(response => {
-            fsPromises.writeFile(path.resolve(process.env.saveFolder, `${date}.json`), JSON.stringify(response.data), {encoding: 'utf-8'}).catch(error => {
+            fsPromises.writeFile(path.resolve(process.env.dayDataFolder, `${date}.json`), JSON.stringify(response.data), {encoding: 'utf-8'}).catch(error => {
                 console.error('Error writing file for data with date:', date, error)
             })
         }).catch(error => {
