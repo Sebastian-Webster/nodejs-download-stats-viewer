@@ -49,6 +49,14 @@ jobs:
         working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
         run: cp ${{ runner.temp }}/json/data.json .
 
+      - name: Commit results
+        uses: actions-js/push@v1.5
+        with:
+          directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
+          empty: true
+          message: 'added new day data'
+          branch: 'gh-pages'
+
       - name: Commit new data
         working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
         run: git add . && git commit -m "action - added new data" && git push
