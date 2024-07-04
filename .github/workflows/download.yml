@@ -43,7 +43,7 @@ jobs:
 
       - name: Clone new days data
         working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
-        run: cp -r ${{ runner.temp }}/json/days json/days
+        run: cp -r ${{ runner.temp }}/json/days json
 
       - name: Clone new days list
         working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
