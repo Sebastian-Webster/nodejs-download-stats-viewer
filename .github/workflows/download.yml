@@ -1,5 +1,9 @@
 name: Download Data
 
+on:
+  push:
+    branches: ['main']
+
 jobs:
   download:
     runs-on: ubuntu-latest
@@ -16,7 +20,7 @@ jobs:
         working-directory: ${{ runner.temp }}/gh-pages
         run: git clone -b gh-pages --single-branch ${{ github.repositoryUrl }}
 
-      - use: actions/setup-node@4
+      - uses: actions/setup-node@4
         with:
           node-version: '22.x'
 
