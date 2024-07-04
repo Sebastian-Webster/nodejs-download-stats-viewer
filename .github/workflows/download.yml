@@ -26,7 +26,7 @@ jobs:
 
       - name: Clone previous days data
         working-directory: ${{ runner.temp }}/gh-pages
-        run: cp -r json/days/* ${{ runner.temp }}/json/days
+        run: "cp -r json/days/* ${{ runner.temp }}/json/days ||:"
 
       - name: Download data
         working-directory: ${{ runner.temp }}/main
