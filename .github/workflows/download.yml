@@ -28,6 +28,10 @@ jobs:
         working-directory: ${{ runner.temp }}/main/nodejs-download-stats-viewer
         run: "cp -r json/days/* ${{ runner.temp }}/json/days ||:"
 
+      - name: Install dependencies
+      working-directory: ${{ runner.temp }}/main/nodejs-download-stats-viewer
+      run: npm ci
+
       - name: Download data
         working-directory: ${{ runner.temp }}/main/nodejs-download-stats-viewer
         run: dayDataFolder=${{ runner.temp }}/json/days dayListFolder=${{ runner.temp }}/json node index.js
