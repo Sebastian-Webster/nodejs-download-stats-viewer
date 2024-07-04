@@ -14,11 +14,11 @@ jobs:
 
       - name: Clone main branch
         working-directory: ${{ runner.temp }}/main
-        run: git clone -b main --single-branch ${{ github.repositoryUrl }}
+        run: git clone -b main --single-branch https://github.com/${{ github.repository }}
 
       - name: Clone gh-pages branch
         working-directory: ${{ runner.temp }}/gh-pages
-        run: git clone -b gh-pages --single-branch ${{ github.repositoryUrl }}
+        run: git clone -b gh-pages --single-branch https://github.com/${{ github.repository }}
 
       - uses: actions/setup-node@v4
         with:
