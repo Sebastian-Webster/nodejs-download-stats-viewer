@@ -4,10 +4,6 @@ on:
   push:
     branches: ['main']
 
-env:
-  MAIN: ${{ runner.temp }}/main/nodejs-download-stats-viewer
-  GH:  ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
-
 jobs:
   download:
     runs-on: ubuntu-latest
@@ -29,26 +25,26 @@ jobs:
           node-version: '22.x'
 
       - name: Clone previous days data
-        working-directory: ${{ env.MAIN }}
+        working-directory: ${{ runner.temp }}/main/nodejs-download-stats-viewer
         run: "cp -r json/days/* ${{ runner.temp }}/json/days ||:"
 
       - name: Download data
-        working-directory: ${{ env.MAIN }}
+        working-directory: ${{ runner.temp }}/main/nodejs-download-stats-viewer
         run: dayDataFolder=${{ runner.temp }}/json/days dayListFolder=${{ runner.temp }}/json node index.js
 
       - name: Delete old data
-        working-directory: ${{ env.GH }}
+        working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
         run: rm -rf json/days
 
       - name: Clone new days data
-        working-directory: ${{ env.GH }}
+        working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
         run: cp -r ${{ runner.temp }}/json/days json/days
 
       - name: Clone new days list
-        working-directory: ${{ env.GH }}
+        working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
         run: cp ${{ runner.temp }}/json/data.json .
 
       - name: Commit new data
-        working-directory: ${{ env.GH }}
+        working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
         run: git add . && git commit -m "action - added new data" && git push
       
