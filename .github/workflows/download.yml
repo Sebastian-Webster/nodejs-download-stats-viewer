@@ -1,0 +1,46 @@
+name: Download Data
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Setup temp folders
+        run: mkdir -p ${{ runner.temp }}/main ${{ runner.temp }}/gh-pages ${{ runner.temp }}/json/days
+
+      - name: Clone main branch
+        working-directory: ${{ runner.temp }}/main
+        run: git clone -b main --single-branch ${{ github.repositoryUrl }}
+
+      - name: Clone gh-pages branch
+        working-directory: ${{ runner.temp }}/gh-pages
+        run: git clone -b gh-pages --single-branch ${{ github.repositoryUrl }}
+
+      - use: actions/setup-node@4
+        with:
+          node-version: '22.x'
+
+      - name: Clone previous days data
+        working-directory: ${{ runner.temp }}/gh-pages
+        run: cp -r json/days/* ${{ runner.temp }}/json/days
+
+      - name: Download data
+        working-directory: ${{ runner.temp }}/main
+        run: dayDataFolder=${{ runner.temp }}/json/days dayListFolder=${{ runner.temp }}/json node index.js\
+
+      - name: Delete old data
+        working-directory: ${{ runner.temp }}/gh-pages
+        run: rm -rf json/days
+
+      - name: Clone new days data
+        working-directory: ${{ runner.temp }}/gh-pages
+        run: cp -r ${{ runner.temp }}/json/days json/days
+
+      - name: Clone new days list
+        working-directory: ${{ runner.temp }}/gh-pages
+        run: cp ${{ runner.temp }}/json/data.json .
+
+      - name: Commit new data
+        working-directory: ${{ runner.temp }}/gh-pages
+        run: git add . && git commit -m "action - added new data" && git push
+      
