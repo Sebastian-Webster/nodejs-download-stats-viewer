@@ -26,7 +26,7 @@ jobs:
           node-version: '22.x'
 
       - name: Clone previous days data
-        working-directory: ${{ runner.temp }}/main/nodejs-download-stats-viewer
+        working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
         run: "cp -r json/days/* ${{ runner.temp }}/json/days ||:"
 
       - name: Install dependencies
