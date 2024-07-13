@@ -29,7 +29,7 @@ jobs:
 
       - name: Clone previous days data
         working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
-        run: "cp -r json/days/* ${{ runner.temp }}/json/days ||:"
+        run: "cp -r json/* ${{ runner.temp }}/json/days ||:"
 
       - name: Install dependencies
         working-directory: ${{ runner.temp }}/main/nodejs-download-stats-viewer
@@ -41,7 +41,7 @@ jobs:
 
       - name: Delete old data
         working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
-        run: rm -rf json/days
+        run: rm -rf json
 
       - name: Clone new days data
         working-directory: ${{ runner.temp }}/gh-pages/nodejs-download-stats-viewer
