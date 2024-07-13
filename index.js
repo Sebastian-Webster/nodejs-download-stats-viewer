@@ -1,5 +1,5 @@
-const params = new URLSearchParams(window.location.search)
-const date = params.get('date')
+const url = new URL(window.location)
+const date = url.searchParams.get('date')
 
 if (date) {
     fetch(`json/${date}.json`).then(response => response.json()).then(response => {
@@ -76,8 +76,8 @@ if (date) {
             const dateString = insertDashesInDate(item.date)
             template.querySelector('.card-date').textContent = dateString
             template.querySelector('.card').addEventListener('click', () => {
-               params.set('date', item.date)
-               window.location.search = params.toString()
+               url.searchParams.set('date', item.date)
+               window.location.href = url.toString()
             })
             daysContainer.appendChild(template)
         }
