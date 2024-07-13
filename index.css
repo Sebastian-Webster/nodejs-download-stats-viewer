@@ -62,6 +62,17 @@ td:nth-child(2) {
     gap: 40px;
 }
 
+th {
+    padding: 0px;
+}
+
+thead {
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    display: block;
+}
+
 @media screen and (max-width: 1100px) {
     #days-container {
         grid-template-columns: repeat(3, 1fr);
