@@ -1,32 +1,89 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <title>NodeJS Download Stats</title>
-    <link href="index.css" rel="stylesheet">
-  </head>
-  <body>
-    <template id="card-template">
-      <div class="card">
-        <h1 class="card-date"></h1>
-      </div>
-    </template>
-    
-    <noscript class="cover-screen" style="z-index: 3;">
-      <h1>Please enable JavaScript for this webpage to work</h1>
-    </noscript>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+        <title>NodeJS Download Stats</title>
+        <link href="index.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+        <template id="card-template">
+            <div class="card">
+                <h1 class="card-date"></h1>
+            </div>
+        </template>
+        
+        <template id="all-days-template">
+            <div class="centre-children-vertically">
+                <h1 style="text-align: center;">NodeJS Display Stats</h1>
+                <h3 style="text-align: center;">Pick a date</h3>
+            </div>
+            
+            <div id="days-container"></div>
+        </template>
 
-    <div id="loading-container" class="cover-screen" style="z-index: 2;">
-      <h1 id="loading-text">Loading...</h1>
-    </div>
+        <template id="single-day-template">
+            <div class="centre-children-vertically">
+                <h1>Viewing stats for day: <span id="day"></span></h1>
+                <h3>Data downloaded: <span id="data-usage"></span>TB</h3>
+                <h3>Node.js Downloads: <span id="downloads"></span></h3>
 
-    <h1 style="text-align: center;">NodeJS Display Stats</h1>
-    <h3 style="text-align: center;">Pick a date</h3>
+                <div id="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Arch</th>
+                                <th>Downloads</th>
+                            </tr>
+                        </thead>
+                        <tbody id="arch-table-body"></tbody>
+                    </table>
 
-    <div id="days-container"></div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Country</th>
+                                <th>Downloads</th>
+                            </tr>
+                        </thead>
+                        <tbody id="countries-table-body"></tbody>
+                    </table>
 
-    <script src="index.js"></script>
-  </body>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Downloads</th>
+                            </tr>
+                        </thead>
+                        <tbody id="versions-table-body"></tbody>
+                    </table>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>OS</th>
+                                <th>Downloads</th>
+                            </tr>
+                        </thead>
+                        <tbody id="os-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </template>
+        
+        <noscript class="cover-screen" style="z-index: 3;">
+            <h1>Please enable JavaScript for this webpage to work</h1>
+        </noscript>
+        
+        <div id="loading-container" class="cover-screen" style="z-index: 2;">
+            <h1 id="loading-text">Loading...</h1>
+        </div>
+        
+        <main></main>
+        
+        <script src="index.js"></script>
+    </body>
 </html>
