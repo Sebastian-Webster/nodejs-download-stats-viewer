@@ -76,8 +76,9 @@ if (date) {
             const dateString = insertDashesInDate(item.date)
             template.querySelector('.card-date').textContent = dateString
             template.querySelector('.card').addEventListener('click', () => {
-               url.searchParams.set('date', item.date)
-               window.location.href = url.toString()
+                console.log(url)
+                url.searchParams.set('date', item.date)
+                window.location.href = url.href
             })
             daysContainer.appendChild(template)
         }
