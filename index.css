@@ -86,3 +86,18 @@ thead {
         align-items: center;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    thead {
+        background-color: black;
+    }
+
+    table {
+        border-color: white;
+    }
+}
