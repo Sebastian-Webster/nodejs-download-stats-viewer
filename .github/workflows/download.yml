@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - run: cat /proc/sys/kernel/unprivileged_userns_clone
       - name: Setup temp folders
         run: mkdir -p ${{ runner.temp }}/main ${{ runner.temp }}/gh-pages ${{ runner.temp }}/json/days
 
