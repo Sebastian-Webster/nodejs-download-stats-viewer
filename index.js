@@ -70,6 +70,7 @@ if (date) {
         const daysContainer = document.getElementById('days-container')
         console.log(response)
         document.getElementById('loading-container').remove()
+        document.getElementById('last-updated-date').textContent = new Date(response.lastUpdated).toLocaleDateString(undefined, {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'longGeneric'})
         const cardTemplate = document.getElementById('card-template')
         for (const item of response.data) {
             const template = cardTemplate.content.cloneNode(true)
